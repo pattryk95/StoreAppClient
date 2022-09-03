@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import { urlProducts } from "./endpoints";
-import { productDTO } from "./products";
+import { urlProducts } from "../../endpoints";
+import { productDTO } from "../models/products";
 
 function App() {
 
