@@ -1,18 +1,23 @@
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { urlProducts } from "../../endpoints";
-import { productDTO } from "../models/products";
+import Catalog from "../../features/catalog/Catalog";
+import { ProductDTO } from "../models/productDTO";
 
-function App() {
+function App()
+{
 
-  const [products, setProducts] = useState<productDTO[]>([]);
+  const [products, setProducts] = useState<ProductDTO[]>([]);
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     loadData();
   }, [])
 
-  function loadData() {
-    axios.get(urlProducts).then((response: AxiosResponse<productDTO[]>) => {
+  function loadData()
+  {
+    axios.get(urlProducts).then((response: AxiosResponse<ProductDTO[]>) =>
+    {
       setProducts(response.data);
     })
   }
@@ -20,12 +25,7 @@ function App() {
   return (
     <>
       <h1>StoreApp</h1>
-      <ul>
-        {products?.map((product, index) =>
-        (
-          <li key={index}>{product.name}</li>
-        ))}
-      </ul>
+      <Catalog products={products} />
     </>
   );
 }
