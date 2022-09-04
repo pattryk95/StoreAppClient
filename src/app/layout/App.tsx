@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { urlProducts } from "../../endpoints";
@@ -24,7 +25,8 @@ function App()
 
   return (
     <>
-      <h1>StoreApp</h1>
+      <Typography variant="h1" component="h2">
+        StoreApp</Typography>
       <Catalog products={products} />
     </>
   );
