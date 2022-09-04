@@ -1,9 +1,10 @@
-import { Typography } from "@mui/material";
+import { Container, CssBaseline, Typography } from "@mui/material";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { urlProducts } from "../../endpoints";
 import Catalog from "../../features/catalog/Catalog";
 import { ProductDTO } from "../models/productDTO";
+import Header from "./Header";
 
 function App()
 {
@@ -25,9 +26,11 @@ function App()
 
   return (
     <>
-      <Typography variant="h1" component="h2">
-        StoreApp</Typography>
-      <Catalog products={products} />
+      <CssBaseline />
+      <Header />
+      <Container>
+        <Catalog products={products} />
+      </Container>
     </>
   );
 }
