@@ -1,16 +1,18 @@
-import { List } from "@mui/material";
+import { Grid, List } from "@mui/material";
 import { ProductDTO } from "../../app/models/productDTO";
 import ProductCard from "./ProductCard";
 
 export default function ProductList({ products }: Props)
 {
     return (
-        <List>
+        <Grid container spacing={4}>
             {products?.map((product, index) =>
             (
-                <ProductCard key={index} product={product} />
+                <Grid item xs={4} key={index}>
+                    <ProductCard product={product} />
+                </Grid>
             ))}
-        </List>
+        </Grid>
     )
 }
 
