@@ -1,37 +1,37 @@
-import { Container, CssBaseline, Typography } from "@mui/material";
-import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
-import { urlProducts } from "../../endpoints";
+import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { useState } from "react";
 import Catalog from "../../features/catalog/Catalog";
-import { ProductDTO } from "../models/productDTO";
 import Header from "./Header";
 
 function App()
 {
+  const [darkMode, setDarkMode] = useState(false);
 
-  const [products, setProducts] = useState<ProductDTO[]>([]);
+  const paletteType = darkMode ? 'dark' : 'light'
+  const theme = createTheme({
+    palette: {
+      mode: paletteType,
+      background: {
+        default: paletteType === 'light' ? '#eaeaea' : '#121212'
+      }
+    }
+  })
 
-  useEffect(() =>
+  function changeTheme()
   {
-    loadData();
-  }, [])
-
-  function loadData()
-  {
-    axios.get(urlProducts).then((response: AxiosResponse<ProductDTO[]>) =>
-    {
-      setProducts(response.data);
-    })
+    setDarkMode(!darkMode);
   }
 
   return (
-    <>
+    <ThemeProvider
+      theme={theme}
+    >
       <CssBaseline />
-      <Header />
+      <Header changeTheme={changeTheme} isDarkModeChecked={darkMode} />
       <Container>
-        <Catalog products={products} />
+        <Catalog />
       </Container>
-    </>
+    </ThemeProvider>
   );
 }
 
