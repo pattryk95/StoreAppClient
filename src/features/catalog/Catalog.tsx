@@ -19,6 +19,7 @@ export default function Catalog()
         {
             setProducts(response.data);
         })
+            .catch(error => console.log(error))
     }
 
     return (
