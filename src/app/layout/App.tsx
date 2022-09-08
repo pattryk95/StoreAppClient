@@ -1,11 +1,7 @@
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import AboutPage from "../../features/about/AboutPage";
-import Catalog from "../../features/catalog/Catalog";
-import ProductDetails from "../../features/catalog/ProductDetails";
-import ContactPage from "../../features/contact/ContactPage";
-import HomePage from "../../features/home/HomePage";
+import { Route, Switch } from "react-router-dom";
+import routes from "../../route-config";
 import Header from "./Header";
 
 function App()
@@ -34,11 +30,14 @@ function App()
       <CssBaseline />
       <Header changeTheme={changeTheme} isDarkModeChecked={darkMode} />
       <Container>
-        <Route exact path='/' component={HomePage} />
-        <Route exact path='/catalog' component={Catalog} />
-        <Route path='/catalog/:id' component={ProductDetails} />
-        <Route path='/about' component={AboutPage} />
-        <Route path='/contact' component={ContactPage} />
+        <Switch>
+          {routes.map((route) => (
+            <Route key={route.path} path={route.path} exact={route.exact}>
+              <route.component />
+            </Route>
+
+          ))}
+        </Switch>
       </Container>
     </ThemeProvider>
   );

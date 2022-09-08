@@ -1,10 +1,10 @@
 import { Typography } from "@mui/material";
 
-export default function HomePage()
+export default function LandingPage()
 {
     return (
         <Typography variant='h2'>
-            Home page
+            Landing page
         </Typography>
     )
 
