@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProductDTO } from "../../app/models/productDTO";
 import { urlProducts } from "../../endpoints";
+import Loading from "../utils/Loading";
+import NotFound from "../utils/NotFound";
 
 export default function ProductDetails()
 {
@@ -15,6 +17,7 @@ export default function ProductDetails()
     useEffect(() =>
     {
         loadProduct();
+        // eslint-disable-next-line
     }, [id])
 
     function loadProduct()
@@ -23,14 +26,15 @@ export default function ProductDetails()
             .then((response: AxiosResponse<ProductDTO>) => 
             {
                 setProduct(response.data);
-                console.log(response.data);
             })
             .catch(error => console.log(error))
             .finally(() => setLoading(false))
     }
-    if (loading) return <h3>Loading...</h3>
+    if (loading) return (
+        <Loading />
+    )
 
-    if (!product) return <h3>Product not found</h3>
+    if (!product) return <NotFound itemName={(Object.keys({ product })).toString()} />
     return (
         <Grid container spacing={6}>
             <Grid item xs={6}>
